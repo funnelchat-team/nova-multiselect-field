@@ -36,7 +36,7 @@
           <template slot="noOptions">{{ __('novaMultiselect.noOptions') }}</template>
         </multiselect>
 
-        <!-- Reorder mode field -->
+        <!-- Reordenar -->
         <div v-if="reorderMode" class="form-input-bordered py-1">
           <vue-draggable
             tag="ul"
