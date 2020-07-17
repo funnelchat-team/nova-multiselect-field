@@ -29,26 +29,27 @@
           :deselectLabel="__('novaMultiselect.deselectLabel')"
           :deselectGroupLabel="__('novaMultiselect.deselectGroupLabel')"
         >
-          <template slot="maxElements">
-            {{ __('novaMultiselect.maxElements', { max: field.max }) }}
-          </template>
+          <template slot="maxElements">{{ __('novaMultiselect.maxElements', { max: field.max }) }}</template>
 
-          <template slot="noResult">
-            {{ __('novaMultiselect.noResult') }}
-          </template>
+          <template slot="noResult">{{ __('novaMultiselect.noResult') }}</template>
 
-          <template slot="noOptions">
-            {{ __('novaMultiselect.noOptions') }}
-          </template>
+          <template slot="noOptions">{{ __('novaMultiselect.noOptions') }}</template>
         </multiselect>
 
         <!-- Reorder mode field -->
         <div v-if="reorderMode" class="form-input-bordered py-1">
-          <vue-draggable tag="ul" v-model="value" class="flex flex-col pl-0" style="list-style: none; margin-top: 5px;">
+          <vue-draggable
+            tag="ul"
+            v-model="value"
+            class="flex flex-col pl-0"
+            style="list-style: none; margin-top: 5px;"
+          >
             <transition-group>
-              <li v-for="s in selected" :key="s" class="reorder__tag text-sm mb-1 px-2 py-1 text-white">
-                {{ s.label }}
-              </li>
+              <li
+                v-for="s in selected"
+                :key="s"
+                class="reorder__tag text-sm mb-1 px-2 py-1 text-white"
+              >{{ s.label }}</li>
             </transition-group>
           </vue-draggable>
         </div>
@@ -57,9 +58,12 @@
           v-if="field.reorderable"
           class="ml-auto mt-2 text-sm font-bold text-primary cursor-pointer dim"
           @click="reorderMode = !reorderMode"
-        >
-          {{ __(reorderMode ? 'novaMultiselect.doneReordering' : 'novaMultiselect.reorder') }}
-        </div>
+        >{{ __(reorderMode ? 'novaMultiselect.doneReordering' : 'novaMultiselect.reorder') }}</div>
+        <div
+          v-if="selectAllOption"
+          class="ml-auto mt-2 text-sm font-bold text-primary cursor-pointer dim"
+          @click="selectAll"
+        >{{__('Select All')}}</div>
       </div>
     </template>
   </default-field>
@@ -80,6 +84,7 @@ export default {
 
   data: () => ({
     reorderMode: false,
+    selectAllOption: true,
   }),
 
   mounted() {
@@ -146,6 +151,9 @@ export default {
       }
     },
 
+    selectAll() {
+      this.value = this.field.options;
+    },
     fill(formData) {
       if (this.isMultiselect) {
         if (this.value && this.value.length) {
