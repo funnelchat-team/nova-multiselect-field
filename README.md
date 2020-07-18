@@ -19,6 +19,7 @@ This restriction is due to `Nova::translatable()` method being added in 2.0.11, 
 - Single select w/ search
 - Reordering functionality with drag & drop
 - Dependency on other Multiselect instances
+- Select all
 
 ## Screenshots
 
