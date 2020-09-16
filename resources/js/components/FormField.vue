@@ -175,7 +175,7 @@ export default {
       }, []);
 
       this.$nextTick(() => this.repositionDropdown());
-      Nova.$emit(`multiselect-${this.field.attribute}-input`, this.value);
+      Nova.$emit(`multiselect-${this.field.attribute}-input`, value);
     },
 
     repositionDropdown(onOpen = false) {
