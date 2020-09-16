@@ -170,17 +170,9 @@ export default {
     },
 
     handleChange(value) {
-      console.log("handleChange");
-      console.log(value);
-      this.value = value;
-
-     let casa = value.reduce((ids, data) => {
-               
-                return [...ids, data.value]
-            }, []);  
-
-
-console.log(casa);
+      this.value = value.reduce((ids, data) => {
+        return [...ids, data.value];
+      }, []);
 
       this.$nextTick(() => this.repositionDropdown());
       Nova.$emit(`multiselect-${this.field.attribute}-input`, this.value);
