@@ -152,8 +152,11 @@ export default {
     },
 
     selectAll() {
+      console.log(this.field.options);
       this.value = this.field.options;
+
     },
+
     fill(formData) {
       if (this.isMultiselect) {
         if (this.value && this.value.length) {
