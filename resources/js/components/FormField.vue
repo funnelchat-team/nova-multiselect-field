@@ -161,13 +161,21 @@ export default {
 
     fill(formData) {
       if (this.isMultiselect) {
+
+
+
         if (this.value && this.value.length) {
           this.value.forEach((v, i) => {
-            formData.append(`${this.field.attribute}[${i}]`, v.value);
+
+            formData.append(`${this.field.attribute}[${i}]`, parseInt(v.value));
+            console.log(formData);
           });
         } else {
           formData.append(this.field.attribute, '');
         }
+
+
+
       } else {
         formData.append(this.field.attribute, (this.value && this.value.value) || '');
       }
