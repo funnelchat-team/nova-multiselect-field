@@ -182,6 +182,11 @@ export default {
     },
 
     handleChange(value) {
+      
+      console.log("handleChange");
+      console.log(value);
+
+
       this.value = value;
       this.$nextTick(() => this.repositionDropdown());
       Nova.$emit(`multiselect-${this.field.attribute}-input`, this.value);
