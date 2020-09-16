@@ -153,8 +153,10 @@ export default {
 
     selectAll() {
       console.log(this.field.options);
-      this.value = this.field.options;
-
+      this.value = this.field.options.reduce((options, option) => {
+        return [...options, { ...option, value: parseInt(option.value) }];
+      }, []);
+      console.log(this.value);
     },
 
     fill(formData) {
