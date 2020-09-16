@@ -152,41 +152,24 @@ export default {
     },
 
     selectAll() {
-      console.log(this.field.options);
-      this.value = this.field.options.reduce((options, option) => {
-        return [...options, { ...option, value: parseInt(option.value) }];
-      }, []);
-      console.log(this.value);
+      this.value = [4,2];
     },
 
     fill(formData) {
       if (this.isMultiselect) {
-
-
-
         if (this.value && this.value.length) {
           this.value.forEach((v, i) => {
-
-            formData.append(`${this.field.attribute}[${i}]`, parseInt(v.value));
-            console.log(formData);
+            formData.append(`${this.field.attribute}[${i}]`, v.value);
           });
         } else {
           formData.append(this.field.attribute, '');
         }
-
-
-
       } else {
         formData.append(this.field.attribute, (this.value && this.value.value) || '');
       }
     },
 
     handleChange(value) {
-      
-      console.log("handleChange");
-      console.log(value);
-
-
       this.value = value;
       this.$nextTick(() => this.repositionDropdown());
       Nova.$emit(`multiselect-${this.field.attribute}-input`, this.value);
