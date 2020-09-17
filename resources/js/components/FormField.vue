@@ -178,7 +178,7 @@ export default {
     handleChange(value) {
       this.valueTemp = value;
       this.value = value.reduce((ids, data) => {
-        console.log(data);
+        console.log(data.value);
         return [...ids, data.value];
       }, []);
 
