@@ -83,6 +83,7 @@ export default {
   props: ['resourceName', 'resourceId', 'field'],
 
   data: () => ({
+    valueTemp: [],
     reorderMode: false,
     selectAllOption: true,
   }),
@@ -137,7 +138,7 @@ export default {
 
   computed: {
     selected() {
-      return this.value || [];
+      return this.valueTemp || [];
     },
   },
 
@@ -146,12 +147,17 @@ export default {
       if (this.isMultiselect) {
         const valuesArray = this.getInitialFieldValuesArray();
         this.value = valuesArray && valuesArray.length ? valuesArray.map(this.getValueFromOptions).filter(Boolean) : [];
+        this.valueTemp =
+          valuesArray && valuesArray.length ? valuesArray.map(this.getValueFromOptions).filter(Boolean) : [];
       } else {
         this.value = this.getValueFromOptions(this.field.value);
+        this.valueTemp =
+          valuesArray && valuesArray.length ? valuesArray.map(this.getValueFromOptions).filter(Boolean) : [];
       }
     },
 
     selectAll() {
+      this.valueTemp = this.field.options;
       this.value = this.field.options;
     },
 
@@ -170,12 +176,13 @@ export default {
     },
 
     handleChange(value) {
+      this.valueTemp = value;
       this.value = value.reduce((ids, data) => {
         return [...ids, data.value];
       }, []);
 
       this.$nextTick(() => this.repositionDropdown());
-      Nova.$emit(`multiselect-${this.field.attribute}-input`, value);
+      Nova.$emit(`multiselect-${this.field.attribute}-input`, this.valueTemp);
     },
 
     repositionDropdown(onOpen = false) {
